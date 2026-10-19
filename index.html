@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reachy Mini</title>
+
+<!-- Fonts: same trio as the Reachy Mini trailer (Anton / DM Sans / JetBrains Mono). Everything the deck loads
+     is local (assets/vendor: fonts, three.js r180, Draco decoder), so it runs without a network. -->
+<link rel="stylesheet" href="assets/vendor/fonts/fonts.css">
+<link rel="stylesheet" href="deck.css">
+
+<script type="importmap">
+{ "imports": {
+    "three": "./assets/vendor/three/build/three.module.js",
+    "three/addons/": "./assets/vendor/three/examples/jsm/"
+} }
+</script>
+
+<!-- Theme first, so a light deck doesn't flash dark; js/theme.js handles the switch. -->
+<script>document.documentElement.dataset.theme = new URLSearchParams(location.search).get('theme') || localStorage.getItem('rm-deck-theme') || 'dark';</script>
+</head>
+<body>
+<div class="deck-viewport">
+<main class="deck-stage" id="deckStage" data-slide="0">
+
+    <!-- === SHARED LAYERS: backdrop, robot, grain === -->
+    <div class="backdrop"><div class="grid"></div></div>
+    <!-- World map: coastlines from the reachy-mini-trailer Space (assets/world-coast.json) -->
+    <div class="worldmap" aria-hidden="true">
+        <svg viewBox="0 0 3600 1800" preserveAspectRatio="none"><g id="mapView"><g id="mapCoast"></g><g id="mapDots"></g></g></svg>
+        <div class="map-pin" data-at="44.84 -0.58"><span>Bordeaux · Pollen Robotics</span></div>
+        <div class="map-pin" data-at="48.86 2.35"><span>Paris · Hugging Face</span></div>
+    </div>
+    <div data-include="slides/credits.html"></div>
+    <canvas id="robotCanvas" width="1920" height="1080" aria-hidden="true"></canvas>
+    <div class="grain"></div>
+
+    <!-- === SLIDES, in order: one file each in slides/ (edit the text there) === -->
+    <div data-include="slides/title.html"></div>
+    <div data-include="slides/pollen.html"></div>
+    <div data-include="slides/family.html"></div>
+    <div data-include="slides/rm.html"></div>
+    <div data-include="slides/exploded.html"></div>
+    <div data-include="slides/motors.html"></div>
+    <div data-include="slides/moves.html"></div>
+    <div data-include="slides/sensors.html"></div>
+    <div data-include="slides/sense.html"></div>
+    <div data-include="slides/stack.html"></div>
+    <div data-include="slides/usage.html"></div>
+    <div data-include="slides/api.html"></div>
+    <div data-include="slides/apps.html"></div>
+    <div data-include="slides/conversation.html"></div>
+    <div data-include="slides/users.html"></div>
+    <div data-include="slides/community.html"></div>
+    <div data-include="slides/growth.html"></div>
+    <div data-include="slides/thanks.html"></div>
+
+    <!-- === 3D-ANCHORED OVERLAY (slide 2 labels + leader line) === -->
+    <div class="overlay" id="overlay">
+        <svg viewBox="0 0 1920 1080">
+            <polyline class="leader" id="leader" points=""/>
+            <circle class="leader-ring" id="leaderRing" r="34" cx="0" cy="0"/>
+            <circle class="leader-halo" id="leaderHalo" r="58" cx="0" cy="0"/>
+            <circle class="leader-dot" id="leaderDot" r="6" cx="0" cy="0"/>
+        </svg>
+        <div id="partLabels"></div>
+        <div id="trackBox"><span>Object</span></div>
+    </div>
+    <!-- theme switch: inside the stage so it scales with the slides and sits on the right margin -->
+    <button class="theme-toggle" id="themeToggle" title="Light / dark (T)" aria-label="Switch light or dark theme"><svg class="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg><svg class="moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg></button>
+</main>
+</div>
+<div class="progress" id="progress"></div>
+
+<!-- Boot: insert the slide files, then run the scripts in order (the scene is an ES module). -->
+<script type="module">
+const parts = [...document.querySelectorAll('[data-include]')];
+const html = await Promise.all(parts.map(el => fetch(el.dataset.include, { cache: 'no-cache' }).then(r => { if (!r.ok) throw new Error(`${el.dataset.include}: ${r.status}`); return r.text(); })));
+parts.forEach((el, i) => { el.outerHTML = html[i]; });
+for (const name of ['theme', 'deck', 'map', 'chart']) {
+    await new Promise((ok, fail) => document.body.append(Object.assign(document.createElement('script'), { src: `js/${name}.js`, onload: ok, onerror: () => fail(new Error(`js/${name}.js`)) })));
+}
+await import('./js/scene.js');
+</script>
+</body>
+</html>
