@@ -5,6 +5,8 @@ first given at Proto Robot #0 (Prague, 23 October 2026). An HTML deck with live 
 
 Live at https://fabiendanieau.github.io/reachy_mini_intro/ (deployed from `main` by `.github/workflows/pages.yml`).
 
+A PDF of every slide and step, for printing or plain display: [`reachy_mini_intro.pdf`](reachy_mini_intro.pdf).
+
 To run it locally, serve it over HTTP (it fetches its slides and ES modules), then open the URL it prints:
 
     uv run --no-project python serve.py
