@@ -442,8 +442,9 @@ pre.code { background: rgba(var(--panel-rgb), 0.85); border: 1px solid var(--lin
 .growth .future .faxis { stroke: rgba(var(--paper-rgb), 0.45); stroke-width: 2; stroke-dasharray: 8 8; }
 .growth .future .fgrid { stroke: rgba(var(--paper-rgb), 0.08); stroke-width: 1; stroke-dasharray: 6 8; }
 .growth .future text { font-family: var(--font-mono); font-size: 21px; fill: var(--muted); }
-/* What's next cards, right of the shrunk chart, each at its band's end (coloured edge = band) */
-.growth .next { position: absolute; left: 1340px; right: 0; display: flex; align-items: center; gap: 12px; padding: 12px 10px 12px 12px; transform: translateY(-50%);
+/* What's next cards, right of the shrunk chart, same height, evenly spaced from above the chart down to the axis (coloured edge = band) */
+.growth .nexts { position: absolute; left: 1340px; right: 0; top: -140px; height: 616px; display: flex; flex-direction: column; gap: 28px; }
+.growth .next { flex: 1; display: flex; align-items: center; gap: 12px; padding: 12px 10px 12px 12px;
     border: 1px solid var(--line); border-left: 4px solid var(--c); border-radius: 12px; background: rgba(var(--panel-rgb), 0.85); color: var(--paper); text-decoration: none; opacity: 0; pointer-events: none; transition: opacity 0.8s var(--ease); }
 .deck-stage[data-slide="growth"][data-step="1"] .growth .next { opacity: 1; pointer-events: auto; }
 .growth .next.s1 { --c: var(--s1); } .growth .next.s2 { --c: var(--s2); } .growth .next.s3 { --c: var(--s3); }

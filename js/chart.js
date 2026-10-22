@@ -28,19 +28,6 @@
         const mid = (top(last, n) + (n ? top(last, n - 1) : 0)) / 2, v = last[s.key];
         g += `<g class="endmark"><text class="endlabel" x="${x(N - 1) + 22}" y="${y(mid) + 15}">${v.toLocaleString('en')}<tspan class="endname" dx="16">${s.name}</tspan></text></g>`;
     });
-    // What's next cards (step 1; the chart is 1280 px wide): at their band's end, spread apart if the ends are closer than a card.
-    const K = 1280 / W, cards = [...svg.parentElement.querySelectorAll('.next')], GAP = 150;
-    const ys = cards.map(c => { const n = +c.dataset.band; return y((top(last, n) + (n ? top(last, n - 1) : 0)) / 2); });
-    const pos = ys.map(v => v * K);
-    // Keep cards GAP apart: top to bottom, push each one down past the previous, then shift the group up
-    // by half the push so it stays centred on the band ends.
-    const order = pos.map((p, k) => k).sort((a, b) => pos[a] - pos[b]), want = pos.slice();
-    order.forEach((k, j) => { if (j) pos[k] = Math.max(pos[k], pos[order[j - 1]] + GAP); });
-    const shift = order.reduce((a, k) => a + pos[k] - want[k], 0) / order.length / 2;
-    order.forEach(k => { pos[k] -= shift; });
-    cards.forEach((c, k) => {
-        c.style.top = `${pos[k] - 70}px`; // a bit above the band end, clear of the future axis
-    });
     // Step 1: the month axis continues, dashed, into the free third (where the cards are).
     const dx = (W - L - R) / (N - 1), FUT = 6, xe = x(N - 1);
     const [ly, lm] = last[0].split('-').map(Number);
