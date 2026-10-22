@@ -27,7 +27,7 @@
     --glow-1: #24232a;
     --glow-2: #1b1a1f;
     --code-str: #a8d8a0;
-    --s1: #cc7a14; --s2: #4a94e0; --s3: #3fa877; /* chart series, validated on the dark surface */
+    --s1: #cc7a14; --s2: #4a94e0; --s3: #3fa877; --s4: #9b72d9; /* chart series, validated on the dark surface */
 }
 /* Light theme, for bright rooms: the toggle (top left) sets data-theme on <html>. Accent and chart
    series are stepped darker to keep their contrast on the light surface. */
@@ -46,7 +46,7 @@
     --glow-1: #ffffff;
     --glow-2: #faf8f2;
     --code-str: #2e7d32;
-    --s1: #b86200; --s2: #2a78d6; --s3: #238a5c; /* validated on the light surface */
+    --s1: #b86200; --s2: #2a78d6; --s3: #238a5c; --s4: #7a4fc4; /* validated on the light surface */
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -427,10 +427,10 @@ pre.code { background: rgba(var(--panel-rgb), 0.85); border: 1px solid var(--lin
 .growth .axis text { font-family: var(--font-mono); font-size: 21px; fill: var(--muted); }
 /* series colors: validated pair for the dark surface (dataviz validate_palette.js) */
 /* bands: a 2px surface gap between them; they fade in after the slide arrives */
-.growth .band { stroke: var(--ink); stroke-width: 2; stroke-linejoin: round; } .growth .band.s1 { fill: var(--s1); } .growth .band.s2 { fill: var(--s2); } .growth .band.s3 { fill: var(--s3); }
+.growth .band { stroke: var(--ink); stroke-width: 2; stroke-linejoin: round; } .growth .band.s1 { fill: var(--s1); } .growth .band.s2 { fill: var(--s2); } .growth .band.s3 { fill: var(--s3); } .growth .band.s4 { fill: var(--s4); }
 .growth .endname { font-family: var(--font-mono); font-size: 21px; fill: var(--muted); }
 .legend { display: flex; gap: 34px; margin-top: 22px; font-family: var(--font-mono); font-size: 16px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
-.sw { display: inline-block; width: 22px; height: 4px; border-radius: 2px; margin-right: 10px; vertical-align: middle; } .sw.s1 { background: var(--s1); } .sw.s2 { background: var(--s2); } .sw.s3 { background: var(--s3); }
+.sw { display: inline-block; width: 22px; height: 4px; border-radius: 2px; margin-right: 10px; vertical-align: middle; } .sw.s1 { background: var(--s1); } .sw.s2 { background: var(--s2); } .sw.s3 { background: var(--s3); } .sw.s4 { background: var(--s4); }
 .growth .endlabel { font-family: var(--font-display); font-size: 56px; fill: var(--paper); }
 .growth .hair { stroke: rgba(var(--paper-rgb), 0.35); stroke-width: 1; }
 .growth .tip { position: absolute; transform: translate(-50%, calc(-100% - 14px)); padding: 8px 12px; line-height: 1.5; border-radius: 8px; background: rgba(var(--panel-rgb), 0.95); border: 1px solid var(--line); font-family: var(--font-mono); font-size: 16px; color: var(--muted); pointer-events: none; white-space: nowrap; }
