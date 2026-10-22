@@ -974,7 +974,9 @@ function frame(ms) {
     cloud.visible = s.cloud > 0.01;
     if (cloud.visible) {
         const c = cloud.userData;
-        c.puff.material.opacity = 0.22 * s.cloud; // see-through like the Python step's head
+        const light = document.documentElement.dataset.theme === 'light'; // white on the light page vanishes: tint it
+        c.puff.material.color.setHex(light ? 0x9fb0c8 : 0xffffff); c.puff.material.emissive.setHex(light ? 0x4a5a72 : 0xa3a9b4);
+        c.puff.material.opacity = (light ? 0.38 : 0.22) * s.cloud; // see-through like the Python step's head
         spinGears(c.gears, dt, s.cloud);
         cloud.position.y = 0.385 + 0.006 * Math.sin(t * 0.8); // drifts a little
     }
