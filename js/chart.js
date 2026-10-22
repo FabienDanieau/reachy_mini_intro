@@ -1,9 +1,9 @@
 // Apps and moves over time: Hub Spaces tagged as Reachy Mini apps (by createdAt) and moves in the
 // datasets tagged reachy_mini_community_moves (dated by their dataset's createdAt; the synthetic
 // binhpham/reachy-mini-motion-synth set is left out), and the social-wall posts shown on the wall
-// (pollen-robotics/reachy-mini-social-posts, kept, by created_at). Cumulative by month, snapshot 2026-10-16.
+// (pollen-robotics/reachy-mini-social-posts, kept, by created_at). Cumulative by month, snapshot 2026-10-22.
 (() => {
-    const ROWS = [["2025-07", 1, 0, 160], ["2025-08", 1, 85, 176], ["2025-09", 1, 104, 195], ["2025-10", 4, 104, 217], ["2025-11", 7, 104, 244], ["2025-12", 50, 105, 347], ["2026-01", 75, 105, 442], ["2026-02", 123, 132, 516], ["2026-03", 159, 156, 556], ["2026-04", 194, 167, 591], ["2026-05", 320, 180, 717], ["2026-06", 371, 332, 820], ["2026-07", 431, 404, 925], ["2026-08", 483, 411, 1080], ["2026-09", 536, 413, 1279], ["2026-10", 558, 423, 1364]]; // [month, apps, moves, posts]
+    const ROWS = [["2025-07", 1, 0, 162], ["2025-08", 1, 85, 178], ["2025-09", 1, 104, 197], ["2025-10", 4, 104, 221], ["2025-11", 7, 104, 248], ["2025-12", 50, 105, 351], ["2026-01", 75, 105, 446], ["2026-02", 124, 132, 520], ["2026-03", 160, 156, 560], ["2026-04", 195, 167, 595], ["2026-05", 323, 180, 723], ["2026-06", 374, 332, 826], ["2026-07", 436, 404, 931], ["2026-08", 488, 411, 1087], ["2026-09", 543, 413, 1288], ["2026-10", 578, 423, 1401]]; // [month, apps, moves, posts]
     // Cumulative flow: bands stacked bottom to top, apps, moves, posts; the top edge is the total.
     const S = [{ key: 1, name: 'apps', cls: 's1' }, { key: 2, name: 'moves', cls: 's2' }, { key: 3, name: 'posts', cls: 's3' }];
     const svg = document.getElementById('growthChart'), tip = document.getElementById('growthTip');
